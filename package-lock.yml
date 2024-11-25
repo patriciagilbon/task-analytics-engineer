@@ -1,0 +1,4 @@
+packages:
+  - package: Snowflake-Labs/dbt_constraints
+    version: 1.0.3
+sha1_hash: 0902e14603720aee652236632ecaaf58dd5c0e40

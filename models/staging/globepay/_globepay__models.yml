@@ -1,0 +1,44 @@
+version: 2
+
+models:
+  - name: stg_globepay__acceptance
+    description: '{{ doc("_globepay__docs__stg_globepay__acceptance") }}'
+    columns:
+    - name: ref_id
+      description: '{{ doc("_globepay__docs__ref_id") }}'
+      data_tests:
+          - dbt_constraints.primary_key
+    - name: status
+      description: '{{ doc("_globepay__docs__status") }}'
+    - name: source
+      description: '{{ doc("_globepay__docs__source") }}'
+    - name: ref
+      description: '{{ doc("_globepay__docs__ref") }}'
+    - name: date_time
+      description: '{{ doc("_globepay__docs__date_time") }}'
+    - name: state
+      description: '{{ doc("_globepay__docs__state") }}'
+    - name: amount
+      description: '{{ doc("_globepay__docs__amount") }}'
+    - name: country
+      description: '{{ doc("_globepay__docs__country") }}'
+    - name: currency
+      description: '{{ doc("_globepay__docs__currency") }}'
+    - name: rates
+      description: '{{ doc("_globepay__docs__rates") }}'
+    - name: is_cvv_provided
+      description: '{{ doc("_globepay__docs__is_cvv_provided") }}'
+
+  - name: stg_globepay__chargeback  
+    description: '{{ doc("_globepay__docs__stg_globepay__chargeback") }}'
+    columns:
+    - name: ref_id
+      description: '{{ doc("_globepay__docs__ref_id") }}'
+      data_tests:
+          - dbt_constraints.primary_key
+    - name: chargeback_status
+      description: '{{ doc("_globepay__docs__chargeback_status") }}'
+    - name: chargeback_source
+      description: '{{ doc("_globepay__docs__chargeback_source") }}'
+    - name: is_chargeback
+      description: '{{ doc("_globepay__docs__is_chargeback") }}'

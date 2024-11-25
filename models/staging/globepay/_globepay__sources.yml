@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: globepay
+    description: '{{ doc("_globepay__docs") }}'
+    schema: globepay
+    database: deel
+    tables:
+      - name: chargeback
+        description: '{{ doc("_globepay__docs__chargeback") }}'
+      - name: acceptance
+        description: '{{ doc("_globepay__docs__acceptance") }}'
