@@ -78,7 +78,7 @@ The structure of the project is based on the following
 
 ## 5. Key Features of the Project
 ### Packages Used
-1. [Constraints Package](https://hub.getdbt.com/Snowflake-Labs/dbt_constraints/latest/) - to validate the uniqueness of primary keys and ensure foreign key constraints. This has been applied to all the models.
+1. [Constraints Package](https://hub.getdbt.com/Snowflake-Labs/dbt_constraints/latest/) - to validate the uniqueness of primary keys, ensure foreign key constraints or unique keys. This has been applied to all the models.
 2. [Meta Testing Package](https://hub.getdbt.com/tnightengale/dbt_meta_testing/latest/) - to validate documentation coverage, enforcing all models and fields are properly documented. To test run `dbt run-operation required_docs`
 
 ### SQLFluff for Linting
@@ -114,6 +114,7 @@ We can visualize the documentation with two different commands: `dbt docs serve`
 ## 7. Testing
 
 ## 8. Macros
+The project includes the `convert_to_usd` macro, which converts an amount to USD. By centralizing this logic, we ensure consistency and avoid code duplication across models.
 
 ## 9. Future Enhancements
 1. **Alerting**

@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: exchange_rate_daily
+    description: '{{ doc("_utilities__docs__exchange_rate_daily") }}'
+    columns:
+    - name: date_day
+      description: '{{ doc("_utilities__docs__date_day") }}'
+    - name: currency
+      description: '{{ doc("_globepay__docs__transaction_currency") }}'
+    - name: exchange_rate
+      description: '{{ doc("_utilities__docs__exchange_rate") }}'
+    data_tests:
+    - dbt_constraints.unique_key:
+            column_names:
+              - date_day
+              - currency

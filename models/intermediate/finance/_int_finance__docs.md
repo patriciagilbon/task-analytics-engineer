@@ -1,4 +1,4 @@
-{% docs _int_finance__docs %}
+{% docs _int_finance__docs__int_transactions_converted_to_usd %}
 This model joins transactions and chargeback staging tables. It contains information about transactions, including the transaction amounts converted to USD and chargeback status.
 {% enddocs %}
 

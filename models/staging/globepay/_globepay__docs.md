@@ -49,7 +49,7 @@ A reference number for the transactions transactions, typically used to cross-re
 {% enddocs %}
 
 {% docs _globepay__docs__transaction_at %}
-The date and time when the transactions transactions was created.
+Timestamp when the transactions transactions was created.
 {% enddocs %}
 
 {% docs _globepay__docs__transaction_state %}

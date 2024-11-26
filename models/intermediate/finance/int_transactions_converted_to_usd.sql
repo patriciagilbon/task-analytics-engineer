@@ -15,18 +15,7 @@ with transactions as (
         lateral flatten(input => parse_json(t.transaction_rates)) as rates
     where
         rates.key = t.transaction_currency
-),
-
-chargebacks as (
-    select
-        transaction_id,
-        is_chargeback
-    from {{ ref('stg_globepay__chargebacks') }}
 )
 
-select
-    transactions.*,
-    chargebacks.is_chargeback
+select *
 from transactions
-left join chargebacks
-    on transactions.transaction_id = chargebacks.transaction_id

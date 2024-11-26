@@ -1,8 +1,8 @@
 version: 2
 
 models:
-  - name: int_transactions_converted_to_usd
-    description: '{{ doc("_int_finance__docs__int_transactions_converted_to_usd") }}'
+  - name: transactions
+    description: '{{ doc("_finance__docs__transactions") }}'
     columns:
       - name: transaction_id
         description: '{{ doc("_globepay__docs__transaction_id") }}'
@@ -20,3 +20,5 @@ models:
         description: '{{ doc("_int_finance__docs__usd_transaction_amount") }}'
       - name: is_transaction_accepted
         description: '{{ doc("_int_finance__docs__is_transaction_accepted") }}'
+      - name: is_chargeback
+        description: '{{ doc("_globepay__docs__is_chargeback") }}'
