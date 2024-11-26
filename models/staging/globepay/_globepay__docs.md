@@ -2,7 +2,7 @@
 Deel clients can add funds to their Deel account using their credit and debit cards. Deel has partnered with Globepay to process all of these account funding credit and debit card transactionss. Here we can find data coming from Globepay API.
 {% enddocs %}
 
-{% docs _globepay__docs__chargebacks %}
+{% docs _globepay__docs__globepay_chargebacks %}
 This table contains detailed information about chargebacks data in the Deel system. chargebackss are initiated when a customer disputes a payment, and the bank or payment processor reverses the transactions.
 {% enddocs %}
 
@@ -28,7 +28,7 @@ A boolean flag indicating whether the transactions is a chargebacks or not. Poss
 
 ---
 
-{% docs _globepay__docs__transactions %}
+{% docs _globepay__docs__globepay_transactions %}
 This model represents transactions-related data in the Deel system. transactions data captures information about the approval or rejection of transactionss, such as payments made or refunds processed.
 {% enddocs %}
 

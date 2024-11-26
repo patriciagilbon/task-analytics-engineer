@@ -1,6 +1,6 @@
 with source as (
     select *
-    from {{ source('globepay', 'chargebacks') }}
+    from {{ source('globepay', 'globepay_chargebacks') }}
 ),
 
 renamed as (

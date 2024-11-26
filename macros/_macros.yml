@@ -2,7 +2,7 @@ version: 2
 
 macros:
   - name: convert_to_usd
-    description: It converts the transaction amount to USD using exchange rates provided in the rates array.
+    description: It converts the transaction amount to USD using exchange rates provided in the rates array and rounds them to two decimals.
     arguments:
       - name: amount
         description: '{{ doc("_globepay__docs__transaction_amount") }}'

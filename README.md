@@ -8,17 +8,20 @@ This project implements a data transformation pipeline using dbt (Data Build Too
 
 ## Table of Contents
 
+### Part 1 
 1. [How to Run the Project](#how-to-run-the-project)
-2. [Project Structure](#project-structure)
-3. [Preliminary Data Exploration](#preliminary-data-exploration)
-4. [Model Architecture and Lineage](#model-architecture-and-lineage)
-5. [Key Features of the Project](#key-features-of-the-project)
-6. [Documentation](#documentation)
-7. [Testing](#testing)
-8. [Macros](#macros)
-9. [Future Enhancements](#future-enhancements)
-10. [Assumptions](#assumptions)
-11. [Challenges and Learnings](#challenges-and-learnings)
+2. [Preliminary Data Exploration](#preliminary-data-exploration)
+3. [Model Architecture and Lineage](#model-architecture-and-lineage)
+4. [Key Features of the Project](#key-features-of-the-project)
+5. [Documentation](#documentation)
+6. [Testing](#testing)
+7. [Macros](#macros)
+8. [Future Enhancements](#future-enhancements)
+9. [Assumptions](#assumptions)
+10. [Challenges and Learnings](#challenges-and-learnings)
+
+### Part 2
+1. [Mart in use](part2.md#part-2)
 
 
 ## 1. How to Run the Project
@@ -57,14 +60,19 @@ source dbt-env/bin/activate # For Mac/Linux
 ```
 pip install -r requirements.txt
 ```
-5. Finally, use dbt debug command to test the connection. 
+5. Finally, use dbt debug command to test the connection.
 
-## 2. Project Structure
-The structure of the project is based on the following
+## 1a. Snowflake connection
+The credentials to connect to Snowflake can be found in the following [1Password link](https://share.1password.com/s#tNX2ZLC7aR_IZJG8xtEROprCv-Meen-3JcWdLYikYTU). Please add the password in the .dbt/profiles.yml to connect to the database.
+
+## 2. Preliminary Data Exploration
+
+## 3. Model Architecture and Lineage
+The architecture of the project is based on the following
 [dbt recommendation](https://docs.getdbt.com/best-practices/how-we-structure/1-guide-overview)
 - `staging`: Contains a view from the raw data. Making only renaming if necessary or conversion to the correct datatype.
 - `intermediate`: Contains working tables that remove complexity to the marts. They are not supposed to be requested. Materialized as ephemeral.
-- `mart`: Contain the data to support a business unit. Materialized as tables.
+- `marts`: Contain the data to support a business unit. Materialized as tables.
 - `utilities`: Contains table that can serve other joins and aggregations.
 
 | tables       | prefix |
@@ -72,11 +80,11 @@ The structure of the project is based on the following
 | staging      | stg    |
 | intermediate | int    |
 
-## 3. Preliminary Data Exploration
+#### Final lineage
+<img src="images/lineage.png" alt="Lineage graph" width="600" height="400">
 
-## 4. Model Architecture and Lineage
 
-## 5. Key Features of the Project
+## 4. Key Features of the Project
 ### Packages Used
 1. [Constraints Package](https://hub.getdbt.com/Snowflake-Labs/dbt_constraints/latest/) - to validate the uniqueness of primary keys, ensure foreign key constraints or unique keys. This has been applied to all the models.
 2. [Meta Testing Package](https://hub.getdbt.com/tnightengale/dbt_meta_testing/latest/) - to validate documentation coverage, enforcing all models and fields are properly documented. To test run `dbt run-operation required_docs`
@@ -95,7 +103,7 @@ Following [dbt's recommendation](https://docs.getdbt.com/best-practices/how-we-s
 - Dates end with `_date`
 - Booleans are prefixed with `is_` or `has_`.
 
-## 6. Documentation
+## 5. Documentation
 ### Jinja for Documentation Blocks
 The project leverages Jinja with the creation of [documentation blocks](https://docs.getdbt.com/docs/build/documentation#using-docs-blocks) in the `.md` file extension of the models. These blocks provide a centralized way to define and manage documentation for models, columns, and their context. The documentation is referenced in the `.yml` files, ensuring consistency and maintainability.
 
@@ -107,16 +115,21 @@ The project leverages Jinja with the creation of [documentation blocks](https://
 We can visualize the documentation with two different commands: `dbt docs serve` & `dbt docs generate`
 1. `dbt docs serve`: This command starts a webserver on port 8080 to serve your documentation locally and opens the documentation site in your default browser.
 
-<img src="images/dbt_docs_serve.png" alt="Lineage graph for chargebacks model" width="600" height="400">
+<img src="images/dbt_docs_serve.png" alt="Docs serve view" width="600" height="400">
 
 2. `dbt docs generate`: Produce the catalog.json file, which contains metadata about the tables and views produced by the models. This can be used on different data catalog tools.
 
-## 7. Testing
+## 6. Testing
+- **Unit test**: Validating SQL Modeling Logic on static inputs.
+In _int_finance__models a unit test has been added to validate the logic of the amount transformation to USD. To test it please run  `dbt test -s test_usd_transaction_amount`
 
-## 8. Macros
+- **Primary Key and Uniqueness Tests**: 
+Using the dbt_constraints package, this project ensures primary key, uniqueness, and other custom tests. For example, in the exchange_rate_daily model it uses unique_key test to ensure there is one unique date_day and currency combination.
+
+## 7. Macros
 The project includes the `convert_to_usd` macro, which converts an amount to USD. By centralizing this logic, we ensure consistency and avoid code duplication across models.
 
-## 9. Future Enhancements
+## 8. Future Enhancements
 1. **Alerting**
 - Freshness is currently not defined in the source configuration since the pipeline is connected to a CSV file in Snowflake, rather than a live database integration. Once a direct database connection is established, freshness checks can be added to the globepay/_globepay_sources.yml file.
 - Freshness checks can be integrated with tools like Slack to send automated warnings if a table fails to meet freshness criteria. This proactive approach helps the team identify and troubleshoot issues in the data pipelines before they impact downstream processes.
@@ -133,7 +146,10 @@ The project includes the `convert_to_usd` macro, which converts an amount to USD
 We can also add after freshness has been implemented:
 - `dbt source freshness` 
 
-## 10. Assumptions
+4. **Testing**
+- There is a single unit test in the entire project, but ideally there should be one for every transformation.
+
+## 9. Assumptions
 - Given this data is related to transactions and changeback, I assumed that the primary stakeholders would be the Finance team. As a result, I placed this mart within the Finance folder. However, it could also be relevant to other teams, depending on organizational needs.
 
-## 11. Challenges and Learnings
+## 10. Challenges and Learnings

@@ -20,3 +20,15 @@ models:
         description: '{{ doc("_int_finance__docs__usd_transaction_amount") }}'
       - name: is_transaction_accepted
         description: '{{ doc("_int_finance__docs__is_transaction_accepted") }}'
+
+unit_tests:
+  - name: test_usd_transaction_amount
+    description: "Check the logic to transform currency to usd works correctly. In this example we want to retrieve the MXN rate from the array and divide the amount over the rate."
+    model: int_transactions_converted_to_usd
+    given:
+      - input: ref('stg_globepay__transactions')
+        rows:
+         - {transaction_id: transaction1, transaction_currency: 'MXN', transaction_amount: '1200', transaction_rates: '{"CAD":1.415,"MXN":25.103,"USD":1}'}
+    expect:
+      rows:
+        - {transaction_id: transaction1, usd_transaction_amount: '47.80'}

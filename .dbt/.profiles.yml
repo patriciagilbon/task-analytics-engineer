@@ -1,0 +1,13 @@
+deel:
+  outputs:
+    dev:
+      account: bydspvi-id08418
+      database: DEEL
+      password:
+      role: read_only_role
+      schema: GLOBEPAY
+      threads: 4
+      type: snowflake
+      user: readonly_user
+      warehouse: COMPUTE_WH
+  target: dev
