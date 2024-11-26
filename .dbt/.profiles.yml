@@ -4,10 +4,10 @@ deel:
       account: bydspvi-id08418
       database: DEEL
       password:
-      role: read_only_role
+      role: ACCOUNTADMIN
       schema: GLOBEPAY
       threads: 4
       type: snowflake
-      user: readonly_user
+      user: analyticstask
       warehouse: COMPUTE_WH
   target: dev
