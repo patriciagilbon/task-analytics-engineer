@@ -1,14 +1,14 @@
 with source as (
     select *
-    from {{ source('globepay', 'chargeback') }}
+    from {{ source('globepay', 'chargebacks') }}
 ),
 
 renamed as (
     select
-        ref_id,
+        external_ref as transaction_id,
         status as chargeback_status,
         source as chargeback_source,
-        case when chargeback = true then 1 end as is_chargeback
+        case when chargeback = true then 1 else 0 end as is_chargeback
     from source
 )
 

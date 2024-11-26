@@ -6,7 +6,7 @@ sources:
     schema: globepay
     database: deel
     tables:
-      - name: chargeback
-        description: '{{ doc("_globepay__docs__chargeback") }}'
-      - name: acceptance
-        description: '{{ doc("_globepay__docs__acceptance") }}'
+      - name: chargebacks
+        description: '{{ doc("_globepay__docs__chargebacks") }}'
+      - name: transactions
+        description: '{{ doc("_globepay__docs__transactions") }}'

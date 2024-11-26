@@ -1,39 +1,39 @@
 version: 2
 
 models:
-  - name: stg_globepay__acceptance
-    description: '{{ doc("_globepay__docs__stg_globepay__acceptance") }}'
+  - name: stg_globepay__transactions
+    description: '{{ doc("_globepay__docs__stg_globepay__transactions") }}'
     columns:
-    - name: ref_id
-      description: '{{ doc("_globepay__docs__ref_id") }}'
+    - name: transaction_id
+      description: '{{ doc("_globepay__docs__transaction_id") }}'
       data_tests:
           - dbt_constraints.primary_key
-    - name: status
-      description: '{{ doc("_globepay__docs__status") }}'
-    - name: source
-      description: '{{ doc("_globepay__docs__source") }}'
-    - name: ref
-      description: '{{ doc("_globepay__docs__ref") }}'
-    - name: date_time
-      description: '{{ doc("_globepay__docs__date_time") }}'
-    - name: state
-      description: '{{ doc("_globepay__docs__state") }}'
-    - name: amount
-      description: '{{ doc("_globepay__docs__amount") }}'
-    - name: country
-      description: '{{ doc("_globepay__docs__country") }}'
-    - name: currency
-      description: '{{ doc("_globepay__docs__currency") }}'
-    - name: rates
-      description: '{{ doc("_globepay__docs__rates") }}'
+    - name: transaction_status
+      description: '{{ doc("_globepay__docs__transaction_status") }}'
+    - name: transaction_source
+      description: '{{ doc("_globepay__docs__transaction_source") }}'
+    - name: transaction_ref
+      description: '{{ doc("_globepay__docs__transaction_ref") }}'
+    - name: transaction_at
+      description: '{{ doc("_globepay__docs__transaction_at") }}'
+    - name: transaction_state
+      description: '{{ doc("_globepay__docs__transaction_state") }}'
+    - name: transaction_amount
+      description: '{{ doc("_globepay__docs__transaction_amount") }}'
+    - name: transaction_country
+      description: '{{ doc("_globepay__docs__transaction_country") }}'
+    - name: transaction_currency
+      description: '{{ doc("_globepay__docs__transaction_currency") }}'
+    - name: transaction_rates
+      description: '{{ doc("_globepay__docs__transaction_rates") }}'
     - name: is_cvv_provided
       description: '{{ doc("_globepay__docs__is_cvv_provided") }}'
 
-  - name: stg_globepay__chargeback  
-    description: '{{ doc("_globepay__docs__stg_globepay__chargeback") }}'
+  - name: stg_globepay__chargebacks  
+    description: '{{ doc("_globepay__docs__stg_globepay__chargebacks") }}'
     columns:
-    - name: ref_id
-      description: '{{ doc("_globepay__docs__ref_id") }}'
+    - name: transaction_id
+      description: '{{ doc("_globepay__docs__transaction_id") }}'
       data_tests:
           - dbt_constraints.primary_key
     - name: chargeback_status

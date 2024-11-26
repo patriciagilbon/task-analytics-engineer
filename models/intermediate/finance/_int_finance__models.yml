@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: int_transactions_joined
+    description: '{{ doc("_int_finance__docs") }}'
+    columns:
+      - name: transaction_id
+        description: '{{ doc("_globepay__docs__transaction_id") }}'
+        data_tests:
+          - dbt_constraints.primary_key
+      - name: transaction_at
+        description: '{{ doc("_globepay__docs__transaction_at") }}'
+      - name: transaction_country
+        description: '{{ doc("_globepay__docs__transaction_country") }}'
+      - name: transaction_currency
+        description: '{{ doc("_globepay__docs__transaction_currency") }}'
+      - name: original_currency_transaction_amount
+        description: '{{ doc("_globepay__docs__transaction_amount") }}'
+      - name: usd_transaction_amount
+        description: '{{ doc("_int_finance__docs__usd_transaction_amount") }}'
+      - name: is_transaction_accepted
+        description: '{{ doc("_int_finance__docs__is_transaction_accepted") }}'
+      - name: is_chargeback
+        description: '{{ doc("_globepay__docs__is_chargeback") }}'

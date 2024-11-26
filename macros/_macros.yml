@@ -1,0 +1,12 @@
+version: 2
+
+macros:
+  - name: convert_to_usd
+    description: It converts the transaction amount to USD using exchange rates provided in the rates array.
+    arguments:
+      - name: amount
+        description: '{{ doc("_globepay__docs__transaction_amount") }}'
+      - name: currency
+        description: '{{ doc("_globepay__docs__transaction_currency") }}'
+      - name: rates
+        description: '{{ doc("_globepay__docs__transaction_rates") }}'
