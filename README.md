@@ -71,29 +71,29 @@ The credentials to connect to Snowflake can be found in the following [1Password
 ## 2. Preliminary Data Exploration
 #### Data Sources - The primary sources include:
 
-**Transactions Table (Acceptance Report CSV):** Contains transactional data including transaction id's, amount, currency, and status of each transaction.
-**Chargebacks Table:** Includes data on disputed transactions, marking those that have been flagged for chargeback.
+- **Transactions Table (Acceptance Report CSV):** Contains transactional data including transaction id's, amount, currency, and status of each transaction.
+- **Chargebacks Table:** Includes data on disputed transactions, marking those that have been flagged for chargeback.
 
 #### Key Fields - Some of the key fields in the datasets include:
-`external_ref`: primary key of transactions and chargebacks table (not null and unique).
-`date_time`: Timestamp of the transaction.
-`currency`: Currency used for the transaction.
-`state`: Whether the transaction was ACCEPTED or DECLINED.
-`chargeback`: Indicator showing if the transaction was flagged for chargeback (TRUE or FALSE).
+- `external_ref`: primary key of transactions and chargebacks table (not null and unique).
+- `date_time`: Timestamp of the transaction.
+- `currency`: Currency used for the transaction.
+- `state`: Whether the transaction was ACCEPTED or DECLINED.
+- `chargeback`: Indicator showing if the transaction was flagged for chargeback (TRUE or FALSE).
 
 #### Data Quality:
-**Missing Data:** No missing or null values were found.
-**Relationships:** There is a one-to-one relationship between the transactions and chargebacks tables, with external_ref as the linking and primary key.
-**Data Consistency:** The `state` field contains consistent values (ACCEPTED and DECLINED), and the `chargeback` field is consistently populated with TRUE or FALSE.
-**Data Types:** 
+- **Missing Data:** No missing or null values were found.
+- **Relationships:** There is a one-to-one relationship between the transactions and chargebacks tables, with external_ref as the linking and primary key.
+- **Data Consistency:** The `state` field contains consistent values (ACCEPTED and DECLINED), and the `chargeback` field is consistently populated with TRUE or FALSE.
+- **Data Types:** 
 - BOOLEAN is used for binary fields such as `status`, `cvv_provided`, and `chargeback`.
 - TIMESTAMP_NTZ is used for `date_time`
 - NUMBER is used for `amoumt`
 All the other fields are VARCHAR.
 
 #### Data distribution:
-**Transaction Counts:** A total of 5430 transactions are present in both tables, with 69% of transactions accepted and 4% flagged for chargeback.
-**Country Breakdown:** The dataset includes 905 transactions per country from the US, MX, UK, FR, CA, and AE.
+- **Transaction Counts:** A total of 5430 transactions are present in both tables, with 69% of transactions accepted and 4% flagged for chargeback.
+- **Country Breakdown:** The dataset includes 905 transactions per country from the US, MX, UK, FR, CA, and AE.
 
 #### Initial Findings:
 - Based on initial exploration, there appear to be no data quality issues that would affect the subsequent analysis or model development.
@@ -104,7 +104,7 @@ The architecture of the project is based on the following
 - `staging`: Contains a view from the raw data. Making only renaming if necessary or conversion to the correct datatype.
 - `intermediate`: Contains working tables that remove complexity to the marts. They are not supposed to be requested. Materialized as ephemeral.
 - `marts`: Contain the data to support a business unit. Materialized as tables.
-- `utilities`: Contains table that can serve other joins and aggregations.
+- `utilities`: This table supports other joins and aggregations. In this project, it includes the exchange_rate_daily table, which stores the latest exchange rate for each country on a given day, derived from the rates array in the transactions table. 
 
 | tables       | prefix |
 | ------------ | ------ |
@@ -114,7 +114,7 @@ The architecture of the project is based on the following
 #### Final lineage
 <img src="images/lineage.png" alt="Lineage graph" width="600" height="400">
 
-#### Transactions marts
+#### Transactions mart
 | Column Name                   | Data Type  | Description                                         |
 |--------------------------------|------------|-----------------------------------------------------|
 | `transaction_id`                    | VARCHAR    | Unique identifier for each transaction.                  |
@@ -192,7 +192,7 @@ The project includes the `convert_to_usd` macro, which converts an amount to USD
 - There is a single unit test in the entire project, but ideally there should be one for every transformation. 
 
 ## 9. Assumptions
-- Given this data is related to transactions and changeback, I assumed that the primary stakeholders would be the Finance team. As a result, I placed this mart within the Finance folder. However, it could also be relevant to other teams, depending on organizational needs.
+- Given this data is related to transactions and chargeback, I assumed that the primary stakeholders would be the Finance team. As a result, I placed this mart within the Finance folder. However, it could also be relevant to other teams, depending on organizational needs.
 
 ## 10. Extra note
 Hi there :wave:

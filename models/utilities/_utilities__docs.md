@@ -8,4 +8,5 @@ Indicates for the date.
 
 {% docs _utilities__docs__exchange_rate %}
 The exchange rate for converting one currency into another. This is derived from the rates provided in the transaction records. It represents how much of the base currency (usually USD) is equivalent to the specified currency at the time of the transaction.
+Given that the currency fluctuates within the day, this table takes the latest value for the day. 
 {% enddocs %}
